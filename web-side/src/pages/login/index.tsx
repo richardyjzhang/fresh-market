@@ -4,6 +4,7 @@ import React from 'react';
 import { useRequest } from 'ahooks';
 import styles from './index.css';
 import { postLoginRequest } from './service';
+import { history } from 'umi';
 
 const LoginPage: React.FC = () => {
     const { run: login } = useRequest(postLoginRequest, {
@@ -12,6 +13,7 @@ const LoginPage: React.FC = () => {
             const result = data as API.Login.LoginResult;
             if (result.success) {
                 message.success(result.message);
+                history.push('/');
             } else {
                 message.error(result.message);
             }

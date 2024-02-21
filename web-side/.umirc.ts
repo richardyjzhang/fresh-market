@@ -4,7 +4,7 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/dashboard',
     },
     {
       name: '登录',
@@ -13,23 +13,23 @@ export default defineConfig({
       hideInMenu: true,
       layout: false,
     },
-    /* {
+    {
       path: '/',
-      component: '@/layouts/Management',
+      component: '@/layouts/management',
       layout: false,
       routes: [
         {
-          name: '组织管理',
-          path: '/organization',
-          component: './Organization',
+          name: '经营概览',
+          path: '/dashboard',
+          component: './dashboard',
         }
       ],
     },
     {
       name: '首页',
-      path: '/home',
-      component: './Home',
-    }, */
+      path: '/dashboard',
+      component: './dashboard',
+    },
   ],
   proxy: {
     "/api": {
