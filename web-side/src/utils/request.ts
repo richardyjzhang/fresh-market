@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from 'antd';
 
 const request = axios.create({
     baseURL: "http://127.0.0.1:8000",
@@ -11,16 +12,17 @@ request.interceptors.response.use(
         return data;
     },
     (error) => {
-        let message = "";
+        let msg = "";
         if (error && error.response) {
             switch (error.response.status) {
                 case 401:
                     break;
                 default:
+                    message.error('网络错误');
                     break;
             }
         }
-        return Promise.reject(message);
+        return Promise.reject(msg);
     }
 );
 
