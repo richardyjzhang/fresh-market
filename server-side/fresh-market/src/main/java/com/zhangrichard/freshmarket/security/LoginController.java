@@ -51,4 +51,10 @@ public class LoginController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @PostMapping("/logout")
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+    }
+
 }

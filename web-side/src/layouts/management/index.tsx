@@ -1,6 +1,7 @@
-import { Outlet } from 'umi';
+import { Outlet, history } from 'umi';
 import { ConfigProvider, Dropdown } from 'antd';
 import MyMenu from './menu';
+import { postLogoutRequest } from './service';
 import styles from './index.css';
 
 export default function Layout() {
@@ -18,7 +19,8 @@ export default function Layout() {
             key: 'logout',
             label: '退出登录',
             onClick: () => {
-                console.log('退出登录');
+                history.push('/login');
+                postLogoutRequest();
             }
         }
     ];
