@@ -44,4 +44,5 @@
 
 .main {
     padding: 1rem;
+    width: calc(100% - 256px);
 }
