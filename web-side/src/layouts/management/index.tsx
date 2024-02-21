@@ -1,5 +1,6 @@
 import { Outlet } from 'umi';
 import { ConfigProvider, Dropdown } from 'antd';
+import MyMenu from './menu';
 import styles from './index.css';
 
 export default function Layout() {
@@ -40,7 +41,12 @@ export default function Layout() {
                     </div>
 
                 </nav>
-                <Outlet />
+                <div className={styles.body}>
+                    <MyMenu />
+                    <main className={styles.main}>
+                        <Outlet />
+                    </main>
+                </div>
             </div>
         </ConfigProvider>
 

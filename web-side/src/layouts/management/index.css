@@ -31,3 +31,16 @@
     font-size: 1rem;
     color: #ffffff;
 }
+
+.body {
+    display: flex;
+    height: calc(100vh - 4rem);
+}
+
+.menu {
+    width: 256px;
+}
+
+.main {
+    padding: 1rem;
+}
