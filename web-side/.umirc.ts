@@ -26,22 +26,22 @@ export default defineConfig({
         {
           name: '分类管理',
           path: '/product-category',
-          component: './dashboard',
+          component: './product-category',
         },
         {
           name: '标签管理',
           path: '/product-tag',
-          component: './dashboard',
+          component: './product-tag',
         },
         {
           name: '商品管理',
           path: '/product',
-          component: './dashboard',
+          component: './product',
         },
         {
           name: '订单管理',
           path: '/order',
-          component: './dashboard',
+          component: './order',
         },
       ],
     },
