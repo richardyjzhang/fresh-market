@@ -1,9 +1,10 @@
-import { Button, Col, Divider, Form, Input, message, Row } from 'antd';
+import { Button, ConfigProvider, Divider, Form, Input, message, Row } from 'antd';
 import { SHA256 } from 'crypto-js';
 import React from 'react';
 import { useRequest } from 'ahooks';
 import styles from './index.css';
 import { postLoginRequest } from './service';
+import { history } from 'umi';
 
 const LoginPage: React.FC = () => {
     const { run: login } = useRequest(postLoginRequest, {
@@ -12,6 +13,7 @@ const LoginPage: React.FC = () => {
             const result = data as API.Login.LoginResult;
             if (result.success) {
                 message.success(result.message);
+                history.push('/');
             } else {
                 message.error(result.message);
             }
@@ -32,10 +34,17 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className={styles.root}>
-            <Row className={styles.loginWrapper} justify="end" align="middle">
-                <Col>
-                    <div className={styles.loginCard}>
-                        <div className={styles.loginTitle}>瑶总鲜选</div>
+            <div className={styles.loginWrapper}>
+                <div className={styles.loginCard}>
+                    <div className={styles.loginTitle}>
+                        <img className={styles.loginIcon} src='icon.png' />
+                        <div className={styles.loginTitleText}>瑶总鲜选管理后台</div>
+                    </div>
+                    <ConfigProvider theme={{
+                        token: {
+                            colorPrimary: '#00b96b',
+                        }
+                    }}>
                         <Divider className={styles.loginDivider} />
                         <Form onFinish={onFormFinished}>
                             <Form.Item name="loginName">
@@ -52,9 +61,10 @@ const LoginPage: React.FC = () => {
                                 登录
                             </Button>
                         </Form>
-                    </div>
-                </Col>
-            </Row>
+                    </ConfigProvider>
+                </div>
+            </div>
+
         </div>
     );
 };
