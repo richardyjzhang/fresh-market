@@ -17,8 +17,11 @@ request.interceptors.response.use(
             switch (error.response.status) {
                 case 401:
                     break;
+                case 400:
+                    message.error('不允许的操作请求');
+                    break;
                 default:
-                    message.error('网络错误');
+                    message.error('服务端错误，请联系管理员');
                     break;
             }
         }
