@@ -13,5 +13,16 @@ declare namespace API {
       name: string;
       ct?: string;
     };
+
+    // 商品
+    type Product = {
+      id?: string;
+      name: string;
+      categoryId: string;
+      type: string;
+      specification: string;
+      currentPrice: number;
+      inventory: number;
+    };
   }
 }
