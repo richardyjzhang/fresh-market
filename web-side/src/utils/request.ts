@@ -1,4 +1,5 @@
 import axios from "axios";
+import { history } from "umi";
 import { message } from "antd";
 
 const request = axios.create({
@@ -16,6 +17,7 @@ request.interceptors.response.use(
     if (error && error.response) {
       switch (error.response.status) {
         case 401:
+          history.push("/login");
           break;
         case 400:
           message.error("不允许的操作请求");
