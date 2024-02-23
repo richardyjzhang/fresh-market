@@ -18,3 +18,25 @@
 .detailButton {
     padding: 0;
 }
+
+.addModal {
+    display: flex;
+    justify-content: center;
+}
+
+.addForm {
+    width: 400px;
+}
+
+.addButton {
+    width: 100%;
+}
+
+.inputNumberForm {
+    width: 100%;
+}
+
+.operationButton {
+    padding: 0;
+    margin-left: 1rem;
+}

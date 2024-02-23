@@ -19,4 +19,23 @@ public class ProductController {
         List<Product> products = productMapper.listProducts();
         return products;
     }
+
+    @PostMapping("/product")
+    Product addOneProduct(@RequestBody Product product,
+                          HttpServletResponse response) {
+
+        product.setId(MyIDGenerator.newID());
+        productMapper.addOneProduct(product);
+
+        response.setStatus(HttpStatus.CREATED.value());
+        return product;
+    }
+
+    @DeleteMapping("/product/{id}")
+    void deleteOneProductById(@PathVariable String id,
+                              HttpServletResponse response) {
+
+        productMapper.deleteOneProductById(id);
+        response.setStatus(HttpStatus.NO_CONTENT.value());
+    }
 }

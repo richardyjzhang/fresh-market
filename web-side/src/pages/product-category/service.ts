@@ -2,7 +2,9 @@ import request from "@/utils/request";
 
 // 获取商品类别列表
 export async function fetchProductCategoriesRequest() {
-  const response = await request("/api/product-categories");
+  const response = await request<API.Product.ProductCategory[]>(
+    "/api/product-categories"
+  );
   return response;
 }
 

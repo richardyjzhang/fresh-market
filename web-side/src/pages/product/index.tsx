@@ -1,25 +1,63 @@
-import React from "react";
-import { Button, Card, ConfigProvider, Table, TableProps } from "antd";
+import React, { useState } from "react";
 import {
+  Button,
+  Card,
+  ConfigProvider,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Popconfirm,
+  Select,
+  Table,
+  TableProps,
+} from "antd";
+import {
+  DeleteOutlined,
+  ExclamationCircleOutlined,
   PlusOutlined,
   ReloadOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { useRequest } from "ahooks";
-import { fetchProductsRequest } from "./service";
+import {
+  fetchProductsRequest,
+  addOneProductRequest,
+  deleteOneProductRequest,
+} from "./service";
+import { fetchProductCategoriesRequest } from "@/pages/product-category/service";
 import styles from "./index.css";
 
 const ProductPage: React.FC = () => {
+  // 弹窗展示
+  const [modalOpen, setModalOpen] = useState(false);
+
   // 各种网络请求
+  const { data: productCategories } = useRequest(fetchProductCategoriesRequest);
   const { runAsync: fetchProducts, data: products } =
     useRequest(fetchProductsRequest);
+  const { runAsync: addOneProduct } = useRequest(addOneProductRequest, {
+    manual: true,
+  });
+  const { runAsync: deleteOneProduct } = useRequest(deleteOneProductRequest, {
+    manual: true,
+  });
+
+  // 删除一个产品
+  const onDelete = async (id: string) => {
+    const _ = await deleteOneProduct(id);
+    await fetchProducts();
+  };
 
   // 主体表格配置
   const columns: TableProps<API.Product.Product>["columns"] = [
     {
-      title: "商品ID",
-      dataIndex: "id",
-      key: "id",
+      title: "序号",
+      key: "num",
+      render: (_, __, index) => {
+        return index + 1;
+      },
     },
     {
       title: "商品名称",
@@ -29,8 +67,11 @@ const ProductPage: React.FC = () => {
     {
       title: "商品类别",
       key: "categoryId",
-      render: () => {
-        return "TODO";
+      render: (_, product) => {
+        const category = productCategories?.find(
+          (c) => c.id === product.categoryId
+        );
+        return category?.name;
       },
     },
     {
@@ -74,11 +115,107 @@ const ProductPage: React.FC = () => {
                 商品详情
               </Button>
             </ConfigProvider>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorLink: "#b90f00",
+                },
+              }}
+            >
+              <Popconfirm
+                title="删除商品"
+                description="此操作无法恢复。是否确认删除？"
+                okText="确认"
+                cancelText="取消"
+                icon={
+                  <ExclamationCircleOutlined style={{ color: "#b90f00" }} />
+                }
+                onConfirm={() => {
+                  if (product.id) {
+                    onDelete(product.id);
+                  }
+                }}
+              >
+                <Button
+                  className={styles.operationButton}
+                  icon={<DeleteOutlined />}
+                  type="link"
+                >
+                  删除
+                </Button>
+              </Popconfirm>
+            </ConfigProvider>
           </div>
         );
       },
     },
   ];
+
+  // 新增弹窗
+  const AddModal = () => {
+    const onFormFinished = async (product: API.Product.Product) => {
+      await addOneProduct(product);
+      setModalOpen(false);
+      fetchProducts();
+    };
+
+    return (
+      <Modal
+        className={styles.addModal}
+        open={modalOpen}
+        title="新增商品"
+        footer={null}
+        onCancel={() => {
+          setModalOpen(false);
+        }}
+      >
+        <div className={styles.addForm}>
+          <Divider />
+          <Form
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 12 }}
+            onFinish={onFormFinished}
+          >
+            <Form.Item name="categoryId" label="商品分类">
+              <Select>
+                {productCategories?.map((c) => (
+                  <Select.Option key={c.id}>{c.name}</Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item name="name" label="商品名称">
+              <Input placeholder="商品名称" />
+            </Form.Item>
+            <Form.Item name="type" label="商品品类">
+              <Input placeholder="用户自定义输入品类" />
+            </Form.Item>
+            <Form.Item name="specification" label="包装规格">
+              <Input placeholder="商品包装规格" />
+            </Form.Item>
+            <Form.Item name="currentPrice" label="当前单价">
+              <InputNumber
+                className={styles.inputNumberForm}
+                placeholder="商品单价"
+              />
+            </Form.Item>
+            <Form.Item name="inventory" label="当前库存">
+              <InputNumber
+                className={styles.inputNumberForm}
+                placeholder="当前库存"
+              />
+            </Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className={styles.addButton}
+            >
+              确认
+            </Button>
+          </Form>
+        </div>
+      </Modal>
+    );
+  };
 
   return (
     <Card className={styles.mainCard} title="商品管理">
@@ -87,7 +224,7 @@ const ProductPage: React.FC = () => {
           icon={<PlusOutlined />}
           type="primary"
           onClick={() => {
-            // setModalOpen(true);
+            setModalOpen(true);
           }}
         >
           新增
@@ -104,6 +241,7 @@ const ProductPage: React.FC = () => {
         </Button>
       </div>
       <Table columns={columns} dataSource={products} />
+      <AddModal />
     </Card>
   );
 };
