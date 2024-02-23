@@ -1,9 +1,6 @@
 package com.zhangrichard.freshmarket.product.product;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,4 +22,12 @@ public interface ProductMapper {
     @Delete(" DELETE FROM `product` " +
             " WHERE `id` = #{id} ")
     void deleteOneProductById(String id);
+
+    @Update(" UPDATE `product` SET `current_price` = #{price} " +
+            " WHERE `id` = #{id} ")
+    void updateOneProductPrice(String id, Double price);
+
+    @Update(" UPDATE `product` SET `inventory` = #{inventory} " +
+            " WHERE `id` = #{id} ")
+    void updateOneProductInventory(String id, Integer inventory);
 }

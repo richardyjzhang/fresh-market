@@ -38,4 +38,18 @@ public class ProductController {
         productMapper.deleteOneProductById(id);
         response.setStatus(HttpStatus.NO_CONTENT.value());
     }
+
+    @PutMapping("/product/price/{id}")
+    void updateOneProductPrice(@PathVariable String id,
+                               @RequestBody Product product) {
+
+        productMapper.updateOneProductPrice(id, product.getCurrentPrice());
+    }
+
+    @PutMapping("/product/inventory/{id}")
+    void updateOneProductInventory(@PathVariable String id,
+                                   @RequestBody Product product) {
+
+        productMapper.updateOneProductInventory(id, product.getInventory());
+    }
 }

@@ -21,3 +21,27 @@ export async function deleteOneProductRequest(id: string) {
     method: "DELETE",
   });
 }
+
+// 调整商品价格
+export async function updateOneProductPriceRequest(
+  id: string,
+  product: API.Product.Product
+) {
+  const response = await request(`/api/product/price/${id}`, {
+    method: "PUT",
+    data: product,
+  });
+  return response;
+}
+
+// 调整商品库存
+export async function updateOneProductInventoryRequest(
+  id: string,
+  product: API.Product.Product
+) {
+  const response = await request(`/api/product/inventory/${id}`, {
+    method: "PUT",
+    data: product,
+  });
+  return response;
+}
