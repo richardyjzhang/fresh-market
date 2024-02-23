@@ -217,7 +217,7 @@ const ProductCategoryPage: React.FC = () => {
           刷新
         </Button>
       </div>
-      <Table columns={columns} dataSource={productCategories} />
+      <Table rowKey="id" columns={columns} dataSource={productCategories} />
       <AddEditModal />
     </Card>
   );

@@ -211,7 +211,7 @@ const ProductTagPage: React.FC = () => {
           刷新
         </Button>
       </div>
-      <Table columns={columns} dataSource={productTags} />
+      <Table rowKey="id" columns={columns} dataSource={productTags} />
       <AddEditModal />
     </Card>
   );
