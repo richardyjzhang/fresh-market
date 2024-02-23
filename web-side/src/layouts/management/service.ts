@@ -1,8 +1,8 @@
-import request from '@/utils/request';
+import request from "@/utils/request";
 
 export async function postLogoutRequest() {
-    const response = await request('/api/logout', {
-        method: 'POST',
-    });
-    return response;
+  const response = await request("/api/logout", {
+    method: "POST",
+  });
+  return response;
 }

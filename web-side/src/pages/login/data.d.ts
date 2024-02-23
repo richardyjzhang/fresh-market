@@ -1,13 +1,13 @@
 declare namespace API {
-    namespace Login {
-        type LoginUser = {
-            loginName: string;
-            password: string;
-        };
+  namespace Login {
+    type LoginUser = {
+      loginName: string;
+      password: string;
+    };
 
-        type LoginResult = {
-            success: boolean;
-            message: string;
-        };
-    }
+    type LoginResult = {
+      success: boolean;
+      message: string;
+    };
+  }
 }
