@@ -1,12 +1,12 @@
-package com.zhangrichard.freshmarket.product;
+package com.zhangrichard.freshmarket.product.tag;
 
 import lombok.Data;
 
 /**
- * 商品类别
+ * 商品标签
  */
 @Data
-public class ProductCategory {
+public class ProductTag {
 
     private String id;
     private String name;

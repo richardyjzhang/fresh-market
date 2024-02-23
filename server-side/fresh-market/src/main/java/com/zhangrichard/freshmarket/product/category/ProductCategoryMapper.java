@@ -1,4 +1,4 @@
-package com.zhangrichard.freshmarket.product;
+package com.zhangrichard.freshmarket.product.category;
 
 import org.apache.ibatis.annotations.*;
 

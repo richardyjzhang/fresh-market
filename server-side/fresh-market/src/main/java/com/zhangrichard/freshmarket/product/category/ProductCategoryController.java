@@ -1,4 +1,4 @@
-package com.zhangrichard.freshmarket.product;
+package com.zhangrichard.freshmarket.product.category;
 
 import com.zhangrichard.freshmarket.utils.MyIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
