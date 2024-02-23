@@ -28,7 +28,7 @@ const MyMenu: React.FC = () => {
           children: [
             {
               key: "/product-category",
-              label: "分类管理",
+              label: "类别管理",
             },
             {
               key: "/product-tag",

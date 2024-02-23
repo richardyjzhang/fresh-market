@@ -218,7 +218,7 @@ const ProductPage: React.FC = () => {
             wrapperCol={{ span: 12 }}
             onFinish={onFormFinished}
           >
-            <Form.Item name="categoryId" label="商品分类">
+            <Form.Item name="categoryId" label="商品类别">
               <Select>
                 {productCategories?.map((c) => (
                   <Select.Option key={c.id}>{c.name}</Select.Option>

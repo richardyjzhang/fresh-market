@@ -24,7 +24,7 @@ export default defineConfig({
           component: "./dashboard",
         },
         {
-          name: "分类管理",
+          name: "类别管理",
           path: "/product-category",
           component: "./product-category",
         },

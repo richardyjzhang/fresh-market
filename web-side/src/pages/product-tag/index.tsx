@@ -172,7 +172,11 @@ const ProductTagPage: React.FC = () => {
         <div className={styles.addEditForm}>
           <Divider />
           <Form onFinish={onFormFinished}>
-            <Form.Item name="name" label="商品标签名称">
+            <Form.Item
+              name="name"
+              label="商品标签名称"
+              rules={[{ required: true }]}
+            >
               <Input placeholder="商品标签名称" defaultValue={curTag?.name} />
             </Form.Item>
             <Button

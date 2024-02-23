@@ -175,7 +175,11 @@ const ProductCategoryPage: React.FC = () => {
         <div className={styles.addEditForm}>
           <Divider />
           <Form onFinish={onFormFinished}>
-            <Form.Item name="name" label="商品类别名称">
+            <Form.Item
+              name="name"
+              label="商品类别名称"
+              rules={[{ required: true }]}
+            >
               <Input
                 placeholder="商品类别名称"
                 defaultValue={curCategory?.name}
@@ -195,7 +199,7 @@ const ProductCategoryPage: React.FC = () => {
   };
 
   return (
-    <Card className={styles.mainCard} title="商品分类管理">
+    <Card className={styles.mainCard} title="商品类别管理">
       <div className={styles.search}>
         <Button
           icon={<PlusOutlined />}
